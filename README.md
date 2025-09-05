@@ -1,3 +1,15 @@
+Description
+
+Schemas for StarDrive | AstroShield SS0–SS6 (Welders Arc). Includes SS5 Mode-1 example and CI validation.
+
+Versioning
+
+Semantic versioning. Tag vMAJOR.MINOR.PATCH; breaking changes bump MAJOR.
+
+CI
+
+GitHub Actions validates example payloads against schemas on push/PR.
+
 AstroShield Welders Arc Schemas (SS0–SS6)
 
 - SS0: schemas/ss0/heartbeat.status.schema.json
