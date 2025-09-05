@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss5/hostility.fused/1.0.0",
+  "title": "SS5 Hostility Fused",
+  "type": "object",
+  "required": [
+    "schemaVersion", "messageId", "timeGenerated", "producer", "eventType", "indicators", "provenance"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string", "format": "date-time"},
+    "producer": {"type": "string"},
+    "eventType": {"const": "ss5.hostility.fused"},
+    "contextIds": {"type": "array", "items": {"type": "string"}},
+    "indicators": {
+      "type": "object",
+      "required": ["intent", "vulnerability", "risk", "weaponCapability", "weaponOpportunity"],
+      "properties": {
+        "intent": {"type": "number", "minimum": 0, "maximum": 1},
+        "vulnerability": {"type": "number", "minimum": 0, "maximum": 1},
+        "risk": {"type": "number", "minimum": 0, "maximum": 1},
+        "weaponCapability": {"type": "number", "minimum": 0, "maximum": 1},
+        "weaponOpportunity": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["manifestId", "gitSha", "algVersion"],
+      "properties": {
+        "manifestId": {"type": "string"},
+        "gitSha": {"type": "string"},
+        "containerDigest": {"type": "string"},
+        "inputMessageIds": {"type": "array", "items": {"type": "string"}},
+        "algVersion": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
+

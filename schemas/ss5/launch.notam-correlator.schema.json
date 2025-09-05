@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss5/launch.notam-correlator/1.0.0",
+  "title": "SS5 Launch NOTAM Correlator",
+  "type": "object",
+  "required": ["schemaVersion","messageId","timeGenerated","producer","eventType","notamId","launchWindow","correlation"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string", "format": "date-time"},
+    "producer": {"type": "string"},
+    "eventType": {"const": "ss5.launch.notam-correlator"},
+    "notamId": {"type": "string"},
+    "launchWindow": {
+      "type": "object",
+      "required": ["start","end"],
+      "properties": {
+        "start": {"type": "string", "format": "date-time"},
+        "end": {"type": "string", "format": "date-time"}
+      },
+      "additionalProperties": false
+    },
+    "polygons": {"type": "array", "items": {"type": "string"}},
+    "correlation": {"type": "number", "minimum": 0, "maximum": 1},
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "manifestId": {"type": "string"},
+        "gitSha": {"type": "string"},
+        "algVersion": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
+
