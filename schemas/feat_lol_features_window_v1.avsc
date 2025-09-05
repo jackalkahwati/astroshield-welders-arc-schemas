@@ -1,0 +1,28 @@
+{
+  "type": "record",
+  "name": "LolFeaturesWindowV1",
+  "namespace": "astroshield.lol.features",
+  "fields": [
+    {"name": "schema_version", "type": "string"},
+    {"name": "region_id", "type": "string"},
+    {"name": "window_id", "type": "string"},
+    {"name": "window_start", "type": "string"},
+    {"name": "window_end", "type": "string"},
+    {"name": "provider_set", "type": {"type":"array","items":"string"}, "default": []},
+    {"name": "feature_vector_rf", "type": {"type":"array","items":"double"}, "default": []},
+    {"name": "feature_vector_eo", "type": {"type":"array","items":"double"}, "default": []},
+    {"name": "feature_vector_radar", "type": {"type":"array","items":"double"}, "default": []},
+    {"name": "tasking_delta", "type": "double", "default": 0.0},
+    {"name": "watermark_time", "type": "string"},
+    {"name": "late_flag", "type": "boolean", "default": false},
+    {"name": "provenance_hash", "type": "string"},
+    {"name": "producer_app", "type": "string"},
+    {"name": "producer_version", "type": "string"},
+    {"name": "ingest_tenant", "type": "string"},
+    {"name": "source_provider_id", "type": "string"},
+    {"name": "traceId", "type": "string"},
+    {"name": "parentMessageIds", "type": {"type":"array","items":"string"}, "default": []}
+  ]
+}
+
+

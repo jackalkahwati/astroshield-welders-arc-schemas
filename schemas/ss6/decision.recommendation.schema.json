@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss6/decision.recommendation/1.0.0",
+  "title": "SS6 Decision Recommendation (TEWA)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "messageId",
+    "timeGenerated",
+    "producer",
+    "recommendationId",
+    "context",
+    "courseOfAction",
+    "confidence",
+    "provenance"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string", "format": "date-time"},
+    "producer": {"type": "string"},
+    "recommendationId": {"type": "string"},
+    "context": {"type": "object"},
+    "courseOfAction": {
+      "type": "object",
+      "required": ["action", "doctrine"]
+    },
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "provenance": {
+      "type": "object",
+      "required": ["manifestId", "gitSha", "algVersion"],
+      "properties": {
+        "manifestId": {"type": "string"},
+        "gitSha": {"type": "string"},
+        "containerDigest": {"type": "string"},
+        "algVersion": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
+
+
+

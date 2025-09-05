@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss3/fusion.association/1.0.0",
+  "title": "SS3 Fusion Association",
+  "type": "object",
+  "required": ["schemaVersion", "messageId", "timeGenerated", "clusterId", "members"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string", "format": "date-time"},
+    "clusterId": {"type": "string"},
+    "members": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+  },
+  "additionalProperties": false
+}
+
+
+

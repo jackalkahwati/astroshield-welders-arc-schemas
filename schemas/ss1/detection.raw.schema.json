@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss1/detection.raw/1.0.0",
+  "title": "SS1 Sensor Detection (raw)",
+  "type": "object",
+  "required": ["schemaVersion", "messageId", "timeObserved", "sensorId", "modality", "measurement"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeObserved": {"type": "string", "format": "date-time"},
+    "sensorId": {"type": "string"},
+    "modality": {"type": "string", "enum": ["radar", "rf", "optical", "opir", "eoir"]},
+    "measurement": {"type": "object"},
+    "quality": {"type": "number", "minimum": 0, "maximum": 1}
+  },
+  "additionalProperties": false
+}
+
+
+

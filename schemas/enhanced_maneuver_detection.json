@@ -1,0 +1,502 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Enhanced Maneuver Detection Message",
+  "description": "Extended message schema for AstroShield enhanced maneuver detection addressing the COSMOS 2558 scenario",
+  "type": "object",
+  "properties": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "Unique message identifier"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Message timestamp in ISO 8601 format"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source system identifier",
+          "enum": ["astroshield-enhanced-maneuver-detection"]
+        },
+        "messageType": {
+          "type": "string",
+          "description": "Enhanced message type",
+          "enum": ["ss2.maneuver.enhanced-detection"]
+        },
+        "version": {
+          "type": "string",
+          "description": "Message schema version",
+          "default": "1.0.0"
+        },
+        "traceId": {
+          "type": "string",
+          "description": "Trace identifier for correlation"
+        },
+        "parentMessageIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Parent message IDs for traceability"
+        }
+      },
+      "required": ["messageId", "timestamp", "source", "messageType"]
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "basicDetection": {
+          "type": "object",
+          "description": "Basic maneuver detection results",
+          "properties": {
+            "objectId": {
+              "type": "string",
+              "description": "Object identifier (e.g., COSMOS-2558)"
+            },
+            "noradId": {
+              "type": "integer",
+              "description": "NORAD catalog ID"
+            },
+            "objectName": {
+              "type": "string",
+              "description": "Object name"
+            },
+            "detectionTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Detection timestamp"
+            },
+            "deltaV": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "description": "Delta-V magnitude in km/s"
+                },
+                "units": {
+                  "type": "string",
+                  "enum": ["km/s", "m/s"]
+                }
+              },
+              "required": ["value", "units"]
+            },
+            "maneuverType": {
+              "type": "string",
+              "description": "Detected maneuver type",
+              "enum": ["STATION_KEEPING", "ORBIT_CHANGE", "ORBIT_ADJUSTMENT", "ATTITUDE_ADJUSTMENT", "MINOR_CORRECTION", "UNKNOWN"]
+            },
+            "basicConfidence": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Basic detection confidence score"
+            },
+            "duration": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "description": "Maneuver duration"
+                },
+                "units": {
+                  "type": "string",
+                  "enum": ["seconds", "minutes", "hours"]
+                }
+              },
+              "required": ["value", "units"]
+            }
+          },
+          "required": ["objectId", "detectionTime", "deltaV", "maneuverType", "basicConfidence"]
+        },
+        "enhancedAnalysis": {
+          "type": "object",
+          "description": "Enhanced analysis results addressing COSMOS 2558 scenario",
+          "properties": {
+            "physicsValidation": {
+              "type": "object",
+              "description": "Physics-based validation results",
+              "properties": {
+                "isPlausible": {
+                  "type": "boolean",
+                  "description": "Whether maneuver is physically plausible"
+                },
+                "violationType": {
+                  "type": "string",
+                  "description": "Type of physics violation if any",
+                  "enum": ["DELTA_V_EXCEEDED", "ACCELERATION_EXCEEDED", "ORBITAL_MECHANICS_VIOLATED", "VALIDATION_ERROR", null]
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0.0,
+                  "maximum": 1.0,
+                  "description": "Confidence in physics validation"
+                },
+                "details": {
+                  "type": "object",
+                  "description": "Detailed physics validation information",
+                  "properties": {
+                    "violations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of physics violations"
+                    },
+                    "deltaVLimit": {
+                      "type": "number",
+                      "description": "Delta-V limit for orbit type (km/s)"
+                    },
+                    "accelerationLimit": {
+                      "type": "number",
+                      "description": "Acceleration limit (m/s²)"
+                    },
+                    "orbitType": {
+                      "type": "string",
+                      "enum": ["LEO", "MEO", "GEO", "HEO"],
+                      "description": "Orbit type classification"
+                    }
+                  }
+                }
+              },
+              "required": ["isPlausible", "confidence", "details"]
+            },
+            "sensorErrorAnalysis": {
+              "type": "object",
+              "description": "Sensor error probability analysis",
+              "properties": {
+                "errorProbability": {
+                  "type": "number",
+                  "minimum": 0.0,
+                  "maximum": 1.0,
+                  "description": "Probability that detection is sensor error"
+                },
+                "errorSources": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Identified error sources"
+                },
+                "dataQualityScore": {
+                  "type": "number",
+                  "minimum": 0.0,
+                  "maximum": 1.0,
+                  "description": "Overall data quality score"
+                },
+                "uncertaintyFactors": {
+                  "type": "object",
+                  "description": "Uncertainty factors by category",
+                  "properties": {
+                    "dataQuality": {
+                      "type": "number",
+                      "minimum": 0.0,
+                      "maximum": 1.0
+                    },
+                    "observationCount": {
+                      "type": "number",
+                      "minimum": 0.0,
+                      "maximum": 1.0
+                    },
+                    "timeSpan": {
+                      "type": "number",
+                      "minimum": 0.0,
+                      "maximum": 1.0
+                    },
+                    "dataGaps": {
+                      "type": "number",
+                      "minimum": 0.0,
+                      "maximum": 1.0
+                    }
+                  }
+                },
+                "sensorMetadata": {
+                  "type": "object",
+                  "description": "Sensor-specific metadata",
+                  "properties": {
+                    "sensorType": {
+                      "type": "string",
+                      "enum": ["radar", "optical", "tle", "combined"]
+                    },
+                    "observationCount": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "timeSpanHours": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "hasDataGaps": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "required": ["errorProbability", "errorSources", "dataQualityScore", "uncertaintyFactors"]
+            },
+            "compositeConfidence": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Composite confidence score combining all factors"
+            },
+            "confidenceLevel": {
+              "type": "string",
+              "enum": ["VERY_LOW", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"],
+              "description": "Categorical confidence level"
+            },
+            "recommendedAction": {
+              "type": "string",
+              "enum": ["DISMISS", "MONITOR", "INVESTIGATE", "IMMEDIATE_ATTENTION", "ESCALATE"],
+              "description": "Recommended action for analysts"
+            }
+          },
+          "required": ["physicsValidation", "sensorErrorAnalysis", "compositeConfidence", "confidenceLevel", "recommendedAction"]
+        },
+        "decisionSupport": {
+          "type": "object",
+          "description": "Decision support information for analysts",
+          "properties": {
+            "analystSummary": {
+              "type": "string",
+              "description": "Human-readable summary for analysts addressing COSMOS 2558 scenario"
+            },
+            "keyFactors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Key factors influencing the assessment"
+            },
+            "uncertaintySources": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Sources of uncertainty in the analysis"
+            },
+            "cosmos2558ScenarioGuidance": {
+              "type": "object",
+              "description": "Specific guidance for COSMOS 2558-like scenarios",
+              "properties": {
+                "scenarioType": {
+                  "type": "string",
+                  "enum": ["maneuver_vs_sensor_error"]
+                },
+                "decisionFramework": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Step-by-step decision framework"
+                },
+                "quickAssessment": {
+                  "type": "string",
+                  "description": "Quick assessment result"
+                }
+              }
+            },
+            "similarCases": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "objectId": {
+                    "type": "string"
+                  },
+                  "similarityScore": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0
+                  },
+                  "outcome": {
+                    "type": "string",
+                    "enum": ["confirmed_maneuver", "sensor_error", "inconclusive"]
+                  },
+                  "date": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              },
+              "description": "Similar historical cases for context"
+            }
+          },
+          "required": ["analystSummary", "keyFactors", "uncertaintySources"]
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Analysis metadata",
+          "properties": {
+            "analysisTimestamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Analysis completion timestamp"
+            },
+            "processingTimeMs": {
+              "type": "number",
+              "description": "Processing time in milliseconds"
+            },
+            "modelVersions": {
+              "type": "object",
+              "description": "Versions of models used",
+              "properties": {
+                "physicsValidator": {
+                  "type": "string"
+                },
+                "sensorErrorEstimator": {
+                  "type": "string"
+                },
+                "compositeScorer": {
+                  "type": "string"
+                }
+              }
+            },
+            "cosmos2558ScenarioAddressed": {
+              "type": "boolean",
+              "description": "Flag indicating this addresses the COSMOS 2558 scenario",
+              "default": true
+            },
+            "operationalImpact": {
+              "type": "object",
+              "description": "Expected operational impact",
+              "properties": {
+                "timeSaved": {
+                  "type": "string",
+                  "description": "Time saved vs manual analysis"
+                },
+                "confidenceImproved": {
+                  "type": "string",
+                  "description": "Confidence improvement description"
+                },
+                "decisionClarity": {
+                  "type": "string",
+                  "description": "Decision clarity improvement"
+                },
+                "falsePositiveReduction": {
+                  "type": "string",
+                  "description": "False positive reduction method"
+                }
+              }
+            }
+          },
+          "required": ["analysisTimestamp", "processingTimeMs", "modelVersions"]
+        }
+      },
+      "required": ["basicDetection", "enhancedAnalysis", "decisionSupport", "metadata"]
+    }
+  },
+  "required": ["header", "payload"],
+  "examples": [
+    {
+      "header": {
+        "messageId": "enhanced-maneuver-20231115-143000-001",
+        "timestamp": "2023-11-15T14:30:00.000Z",
+        "source": "astroshield-enhanced-maneuver-detection",
+        "messageType": "ss2.maneuver.enhanced-detection",
+        "version": "1.0.0",
+        "traceId": "trace-cosmos2558-scenario",
+        "parentMessageIds": ["basic-maneuver-20231115-143000-001"]
+      },
+      "payload": {
+        "basicDetection": {
+          "objectId": "COSMOS-2558",
+          "noradId": 49863,
+          "objectName": "COSMOS 2558",
+          "detectionTime": "2023-11-15T14:30:00.000Z",
+          "deltaV": {
+            "value": 0.025,
+            "units": "km/s"
+          },
+          "maneuverType": "STATION_KEEPING",
+          "basicConfidence": 0.6,
+          "duration": {
+            "value": 300,
+            "units": "seconds"
+          }
+        },
+        "enhancedAnalysis": {
+          "physicsValidation": {
+            "isPlausible": true,
+            "violationType": null,
+            "confidence": 0.95,
+            "details": {
+              "violations": [],
+              "deltaVLimit": 15.0,
+              "accelerationLimit": 50.0,
+              "orbitType": "LEO"
+            }
+          },
+          "sensorErrorAnalysis": {
+            "errorProbability": 0.45,
+            "errorSources": ["Data gaps present", "Insufficient observations"],
+            "dataQualityScore": 0.7,
+            "uncertaintyFactors": {
+              "dataQuality": 0.3,
+              "observationCount": 0.25,
+              "timeSpan": 0.0,
+              "dataGaps": 0.4
+            },
+            "sensorMetadata": {
+              "sensorType": "radar",
+              "observationCount": 4,
+              "timeSpanHours": 12,
+              "hasDataGaps": true
+            }
+          },
+          "compositeConfidence": 0.42,
+          "confidenceLevel": "MEDIUM",
+          "recommendedAction": "MONITOR"
+        },
+        "decisionSupport": {
+          "analystSummary": "UNCERTAIN DETECTION: 42% confidence. Insufficient data for definitive assessment. Continue monitoring.",
+          "keyFactors": [
+            "Physics validation: PASSED",
+            "Poor data quality: 70%",
+            "Data gaps present"
+          ],
+          "uncertaintySources": [
+            "Data gaps present",
+            "Insufficient observations"
+          ],
+          "cosmos2558ScenarioGuidance": {
+            "scenarioType": "maneuver_vs_sensor_error",
+            "decisionFramework": [
+              "1. Check physics validation result",
+              "2. Review sensor error probability",
+              "3. Consider data quality factors",
+              "4. Follow recommended action"
+            ],
+            "quickAssessment": "Possible maneuver but data quality concerns suggest continued monitoring rather than immediate investigation"
+          },
+          "similarCases": [
+            {
+              "objectId": "COSMOS-2558",
+              "similarityScore": 0.85,
+              "outcome": "confirmed_maneuver",
+              "date": "2023-11-15"
+            }
+          ]
+        },
+        "metadata": {
+          "analysisTimestamp": "2023-11-15T14:30:05.123Z",
+          "processingTimeMs": 250,
+          "modelVersions": {
+            "physicsValidator": "1.0.0",
+            "sensorErrorEstimator": "1.0.0",
+            "compositeScorer": "1.0.0"
+          },
+          "cosmos2558ScenarioAddressed": true,
+          "operationalImpact": {
+            "timeSaved": "Hours to minutes",
+            "confidenceImproved": "Quantified uncertainty",
+            "decisionClarity": "Clear recommended action",
+            "falsePositiveReduction": "Physics-based validation"
+          }
+        }
+      }
+    }
+  ]
+} 

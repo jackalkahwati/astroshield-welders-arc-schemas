@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "messageId": "5c7f5a2b-8a48-4f2e-9f0d-9b7e8c9c1111",
+  "timeGenerated": "2025-09-05T20:15:00Z",
+  "producer": "StarDrive-AstroShield",
+  "eventType": "ss5.separation.detected",
+  "primaryId": "CATALOG:12345",
+  "secondaryId": "CATALOG:67890",
+  "tca": "2025-09-05T20:15:10Z",
+  "missDistance_m": 1000.0,
+  "relativeSpeed_mps": 10000.0,
+  "pc": 0.00012,
+  "hardBodyRadius_m": 10.0,
+  "thresholds": { "pcExceeded": true, "missDistanceBelow_m": 2000.0 },
+  "classification": { "indicator": "Proximity/Separation", "confidence": 0.82, "ruleId": "prox-v1" },
+  "provenance": {
+    "manifestId": "sha256:abcd",
+    "gitSha": "deadbeef",
+    "containerDigest": "sha256:feed",
+    "inputMessageIds": ["a1b2c3"],
+    "algVersion": "cass-1.0.0"
+  }
+}
+
+
+

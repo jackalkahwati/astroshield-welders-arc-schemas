@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss0/heartbeat.status/1.0.0",
+  "title": "SS0 Heartbeat Status",
+  "type": "object",
+  "required": ["schemaVersion", "messageId", "timeGenerated", "serviceName", "status"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string", "format": "date-time"},
+    "serviceName": {"type": "string"},
+    "status": {"type": "string", "enum": ["online", "degraded", "offline"]},
+    "metrics": {"type": "object"}
+  },
+  "additionalProperties": false
+}
+
+
+

@@ -1,0 +1,23 @@
+{
+  "type": "record",
+  "name": "LolAlertV1",
+  "namespace": "astroshield.lol.alert",
+  "fields": [
+    {"name": "schema_version", "type": "string"},
+    {"name": "alert_id", "type": "string"},
+    {"name": "region_id", "type": "string"},
+    {"name": "alert_level", "type": "string"},
+    {"name": "ttl_sec", "type": "int"},
+    {"name": "dedupe_key", "type": "string"},
+    {"name": "score_snapshot", "type": "string"},
+    {"name": "playbook_id", "type": "string"},
+    {"name": "ack_deadline_sec", "type": "int"},
+    {"name": "escalation_level", "type": "int"},
+    {"name": "created_at", "type": "string"},
+    {"name": "expires_at", "type": "string"},
+    {"name": "traceId", "type": "string"},
+    {"name": "parentMessageIds", "type": {"type":"array","items":"string"}, "default": []}
+  ]
+}
+
+

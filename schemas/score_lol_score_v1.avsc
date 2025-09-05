@@ -1,0 +1,24 @@
+{
+  "type": "record",
+  "name": "LolScoreV1",
+  "namespace": "astroshield.lol.score",
+  "fields": [
+    {"name": "schema_version", "type": "string"},
+    {"name": "region_id", "type": "string"},
+    {"name": "window_id", "type": "string"},
+    {"name": "window_start", "type": "string"},
+    {"name": "window_end", "type": "string"},
+    {"name": "score", "type": "double"},
+    {"name": "confidence", "type": "double"},
+    {"name": "model_id", "type": "string"},
+    {"name": "model_version", "type": "string"},
+    {"name": "calibration_method", "type": "string"},
+    {"name": "ece_bucket", "type": "double"},
+    {"name": "top_features", "type": {"type":"array","items":"string"}, "default": []},
+    {"name": "inference_time_ms", "type": "int"},
+    {"name": "traceId", "type": "string"},
+    {"name": "parentMessageIds", "type": {"type":"array","items":"string"}, "default": []}
+  ]
+}
+
+

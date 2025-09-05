@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss5/proximity.encounter/1.0.0",
+  "title": "SS5 Proximity Encounter (trigger)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "messageId",
+    "timeObserved",
+    "producer",
+    "primaryId",
+    "secondaryId",
+    "r_icrf_km",
+    "v_icrf_kms",
+    "r2_icrf_km",
+    "v2_icrf_kms",
+    "P1_6x6",
+    "P2_6x6"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeObserved": {"type": "string", "format": "date-time"},
+    "producer": {"type": "string"},
+    "primaryId": {"type": "string"},
+    "secondaryId": {"type": "string"},
+    "stateFrame": {"type": "string", "enum": ["ICRF", "ECI"]},
+    "r_icrf_km": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+    "v_icrf_kms": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+    "r2_icrf_km": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+    "v2_icrf_kms": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+    "P1_6x6": {"type": "array", "items": {"type": "number"}, "minItems": 36, "maxItems": 36},
+    "P2_6x6": {"type": "array", "items": {"type": "number"}, "minItems": 36, "maxItems": 36}
+  },
+  "additionalProperties": false
+}
+
+
+
