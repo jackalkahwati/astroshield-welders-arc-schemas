@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss5/launch.tracklets/1.0.0",
+  "title": "SS5 Launch Tracklets",
+  "type": "object",
+  "required": ["schemaVersion","messageId","timeGenerated","producer","eventType","tracklets"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string","format":"date-time"},
+    "producer": {"type": "string"},
+    "eventType": {"const": "ss5.launch.tracklets"},
+    "tracklets": {"type":"array", "items": {"type":"object","required":["id","epoch"],"properties":{"id":{"type":"string"},"epoch":{"type":"string","format":"date-time"}},"additionalProperties":false}}
+  },
+  "additionalProperties": false
+}
+

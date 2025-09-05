@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss5/launch.weather-check/1.0.0",
+  "title": "SS5 Launch Weather Check",
+  "type": "object",
+  "required": ["schemaVersion","messageId","timeGenerated","producer","eventType","site","constraints"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string","format":"date-time"},
+    "producer": {"type": "string"},
+    "eventType": {"const": "ss5.launch.weather-check"},
+    "site": {"type": "string"},
+    "constraints": {"type": "object"}
+  },
+  "additionalProperties": false
+}
+

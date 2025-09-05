@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss5/launch.coplanar-nominal/1.0.0",
+  "title": "SS5 Launch Coplanar Nominal",
+  "type": "object",
+  "required": ["schemaVersion","messageId","timeGenerated","producer","eventType","vehicle","orbit"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string","format":"date-time"},
+    "producer": {"type": "string"},
+    "eventType": {"const": "ss5.launch.coplanar-nominal"},
+    "vehicle": {"type": "string"},
+    "orbit": {"type":"object","required":["inclination_deg","raan_deg","epoch"],"properties":{"inclination_deg":{"type":"number"},"raan_deg":{"type":"number"},"epoch":{"type":"string","format":"date-time"}},"additionalProperties":false},
+    "provenance": {"type":"object","properties":{"manifestId":{"type":"string"},"gitSha":{"type":"string"},"algVersion":{"type":"string"}},"additionalProperties":false}
+  },
+  "additionalProperties": false
+}
+

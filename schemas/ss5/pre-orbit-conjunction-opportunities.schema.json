@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss5/pre-orbit-conjunction-opportunities/1.0.0",
+  "title": "SS5 Pre-Orbit Conjunction Opportunities",
+  "type": "object",
+  "required": ["schemaVersion","messageId","timeGenerated","producer","eventType","opportunities"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string","format":"date-time"},
+    "producer": {"type": "string"},
+    "eventType": {"const": "ss5.pre-orbit-conjunction-opportunities"},
+    "opportunities": {"type":"array","items":{"type":"object","required":["primaryId","secondaryId","windowStart","windowEnd","score"],"properties":{"primaryId":{"type":"string"},"secondaryId":{"type":"string"},"windowStart":{"type":"string","format":"date-time"},"windowEnd":{"type":"string","format":"date-time"},"score":{"type":"number","minimum":0,"maximum":1}},"additionalProperties":false}}
+  },
+  "additionalProperties": false
+}
+

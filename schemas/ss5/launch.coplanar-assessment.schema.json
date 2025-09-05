@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss5/launch.coplanar-assessment/1.0.0",
+  "title": "SS5 Launch Coplanar Assessment",
+  "type": "object",
+  "required": ["schemaVersion","messageId","timeGenerated","producer","eventType","vehicle","targets"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string","format":"date-time"},
+    "producer": {"type": "string"},
+    "eventType": {"const": "ss5.launch.coplanar-assessment"},
+    "vehicle": {"type": "string"},
+    "targets": {"type":"array", "items": {"type":"object", "required": ["objectId","deltaInclination_deg","score"], "properties": {"objectId": {"type":"string"}, "deltaInclination_deg": {"type":"number"}, "score": {"type":"number", "minimum":0, "maximum":1}}, "additionalProperties": false}},
+    "provenance": {"type":"object","properties":{"manifestId":{"type":"string"},"gitSha":{"type":"string"},"algVersion":{"type":"string"}},"additionalProperties":false}
+  },
+  "additionalProperties": false
+}
+

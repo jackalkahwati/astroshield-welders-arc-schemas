@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss5/pez-wez-prediction.conjunction/1.0.0",
+  "title": "SS5 PEZ/WEZ Prediction - Conjunction",
+  "type": "object",
+  "required": ["schemaVersion","messageId","timeGenerated","producer","eventType","engagement","score"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string","format":"date-time"},
+    "producer": {"type": "string"},
+    "eventType": {"const": "ss5.pez-wez-prediction.conjunction"},
+    "engagement": {
+      "type": "object",
+      "required": ["shooterId","targetId","windowStart","windowEnd"],
+      "properties": {
+        "shooterId": {"type": "string"},
+        "targetId": {"type": "string"},
+        "windowStart": {"type": "string","format":"date-time"},
+        "windowEnd": {"type": "string","format":"date-time"}
+      },
+      "additionalProperties": false
+    },
+    "score": {"type": "number", "minimum": 0, "maximum": 1},
+    "constraints": {"type": "object"},
+    "provenance": {"type":"object","properties":{"manifestId":{"type":"string"},"gitSha":{"type":"string"},"algVersion":{"type":"string"}},"additionalProperties":false}
+  },
+  "additionalProperties": false
+}
+

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss5/launch.nominal/1.0.0",
+  "title": "SS5 Launch Nominal",
+  "type": "object",
+  "required": ["schemaVersion","messageId","timeGenerated","producer","eventType","vehicle","nominal"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string","format":"date-time"},
+    "producer": {"type": "string"},
+    "eventType": {"const": "ss5.launch.nominal"},
+    "vehicle": {"type": "string"},
+    "nominal": {"type":"object","required":["trajectoryId","epoch"],"properties":{"trajectoryId":{"type":"string"},"epoch":{"type":"string","format":"date-time"}},"additionalProperties":false},
+    "provenance": {"type":"object","properties":{"manifestId":{"type":"string"},"gitSha":{"type":"string"},"algVersion":{"type":"string"}},"additionalProperties":false}
+  },
+  "additionalProperties": false
+}
+

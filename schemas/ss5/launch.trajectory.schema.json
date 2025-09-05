@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astroshield.com/schemas/ss5/launch.trajectory/1.0.0",
+  "title": "SS5 Launch Trajectory",
+  "type": "object",
+  "required": ["schemaVersion","messageId","timeGenerated","producer","eventType","trajectoryId","points"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "messageId": {"type": "string"},
+    "timeGenerated": {"type": "string","format":"date-time"},
+    "producer": {"type": "string"},
+    "eventType": {"const": "ss5.launch.trajectory"},
+    "trajectoryId": {"type": "string"},
+    "points": {"type":"array","items":{"type":"object","required":["epoch","lat","lon","alt_km"],"properties":{"epoch":{"type":"string","format":"date-time"},"lat":{"type":"number"},"lon":{"type":"number"},"alt_km":{"type":"number"}},"additionalProperties":false}}
+  },
+  "additionalProperties": false
+}
+
